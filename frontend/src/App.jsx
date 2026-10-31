@@ -187,7 +187,7 @@ export default function App() {
               <div className="max-w-2xl space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   <Sparkles className="w-3.5 h-3.5" />
-                  Spring Boot 3 + React Hardware Showcase
+                  Next-Gen Cloud E-Commerce & Merchant Telemetry
                 </div>
                 <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
                   Engineered for <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Precision</span>. Built for Scale.
@@ -316,7 +316,7 @@ export default function App() {
       {/* Footer */}
       <footer className="border-t border-slate-900 bg-slate-950/80 py-8 text-center text-xs text-slate-500">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p>© 2026 ZENITH Platform. Developed with Spring Boot 3 + React + Tailwind + Docker.</p>
+          <p>© 2026 ZENITH Platform. Built with ❤️ by Manoj. Powered by Spring Boot & React.</p>
           <div className="flex items-center gap-4">
             <button onClick={() => { setActiveTab('store'); window.history.pushState(null, '', '/'); }} className="hover:text-emerald-400">Store</button>
             <span>•</span>

@@ -62,13 +62,25 @@ Tech Stack:
     - Address:   Flat 402, Prestige Towers, Indiranagar, Bengaluru, KA 560038
     - Role:      CUSTOMER
 
-[C] POSTGRESQL DATABASE CREDENTIALS (Internal Container)
-    - Host:      localhost (or postgres inside docker network)
-    - Port:      5432
-    - Database:  zenithdb
-    - User:      zenithuser
-    - Password:  zenithpass
-    - Data Vol:  zenith_pgdata (Preserves catalog & transactions on restarts)
+[C] POSTGRESQL DATABASE CREDENTIALS & CONNECTION STRINGS
+    - Database Name: zenithdb
+    - DB Username:   zenithuser
+    - DB Password:   zenithpass
+    - DB Port:       5432
+    - Data Volume:   zenith_pgdata (Preserves catalog & transactions on restarts)
+    
+    * Cloud Container JDBC URL (Spring Boot -> PostgreSQL):
+      jdbc:postgresql://postgres:5432/zenithdb
+
+    * Localhost / Direct JDBC URL:
+      jdbc:postgresql://localhost:5432/zenithdb
+
+    * Full PostgreSQL URI:
+      postgresql://zenithuser:zenithpass@localhost:5432/zenithdb
+
+    * Live Inspection Command (SSH into EC2, then run):
+      docker exec -it zenith-postgres psql -U zenithuser -d zenithdb
+      (Commands inside psql: \dt, SELECT * FROM products;, \q)
 
 [D] PROMO CODES FOR CHECKOUT DEMO
     - ZENITH10    -> 10% Flat Discount on total cart
