@@ -34,7 +34,7 @@ export default function App() {
       } else {
         setActiveTab('store');
         setAuthModalMode('login');
-        setAuthModalPrompt('Please sign in with Admin credentials to open the Admin Panel (admin / admin123)');
+        setAuthModalPrompt('Please sign in with your Administrator credentials to open the Admin Panel.');
         setIsAuthModalOpen(true);
       }
     } else if (path === '/about' || hash === '#about') {
@@ -334,7 +334,7 @@ export default function App() {
                   setActiveTab('admin');
                   window.history.pushState(null, '', '/admin');
                 } else {
-                  handleOpenAuthModal('login', 'Please sign in as Admin to access the Admin Panel (admin / admin123)');
+                  handleOpenAuthModal('login', 'Please sign in with your Administrator credentials to access the Admin Panel.');
                 }
               }} 
               className="hover:text-emerald-400 font-medium"

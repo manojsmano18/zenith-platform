@@ -2,8 +2,8 @@ import React, { useState } from 'react';
 import { X, Lock, KeyRound, ShieldAlert, CheckCircle2 } from 'lucide-react';
 
 export default function AdminLoginModal({ isOpen, onClose, onLoginSuccess }) {
-  const [username, setUsername] = useState('admin');
-  const [password, setPassword] = useState('admin123');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -98,11 +98,6 @@ export default function AdminLoginModal({ isOpen, onClose, onLoginSuccess }) {
             />
           </div>
 
-          {/* Quick Demo Hint Box */}
-          <div className="p-3 bg-slate-950/80 rounded-xl border border-slate-800 text-[11px] text-slate-400 flex items-center justify-between">
-            <span>Demo Credentials:</span>
-            <span className="font-mono text-emerald-400 font-semibold">admin / admin123</span>
-          </div>
 
           <button
             type="submit"

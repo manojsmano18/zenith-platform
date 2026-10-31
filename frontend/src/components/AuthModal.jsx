@@ -15,20 +15,6 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
 
   if (!isOpen) return null;
 
-  const handleQuickFillCustomer = () => {
-    setMode('login');
-    setEmail('alex@example.com');
-    setPassword('password123');
-    setError('');
-  };
-
-  const handleQuickFillAdmin = () => {
-    setMode('login');
-    setEmail('admin');
-    setPassword('admin123');
-    setError('');
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -201,28 +187,6 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
             </div>
           )}
 
-          {/* Quick Demo Pre-fill shortcuts */}
-          {mode === 'login' && (
-            <div className="pt-1">
-              <span className="text-[10px] text-slate-500 block mb-1.5 uppercase font-bold tracking-wider">Quick Fill Demo Credentials:</span>
-              <div className="flex gap-2">
-                <button
-                  type="button"
-                  onClick={handleQuickFillCustomer}
-                  className="flex-1 py-1.5 px-2 bg-slate-950 hover:bg-slate-800 text-slate-300 text-[11px] rounded-lg border border-slate-800 transition-colors"
-                >
-                  👤 Customer Demo
-                </button>
-                <button
-                  type="button"
-                  onClick={handleQuickFillAdmin}
-                  className="flex-1 py-1.5 px-2 bg-slate-950 hover:bg-slate-800 text-emerald-400 text-[11px] rounded-lg border border-slate-800 transition-colors"
-                >
-                  ⚡ Admin Demo
-                </button>
-              </div>
-            </div>
-          )}
 
           <button
             type="submit"
