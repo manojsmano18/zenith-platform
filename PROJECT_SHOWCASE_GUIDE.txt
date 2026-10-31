@@ -179,6 +179,19 @@ This demonstrates automated DevSecOps and continuous deployment:
    - Show that your change is LIVE on the internet without you ever logging 
      into the AWS server manually!
 
+[OPTIONAL: ONE-TIME GITHUB SECRETS SETUP FOR AUTOMATED SSH DEPLOYMENT]
+To allow GitHub Actions to SSH into the AWS server automatically on git push:
+1. Go to: https://github.com/manojsmano18/zenith-platform/settings/secrets/actions
+2. Click "New repository secret":
+   - Name:  EC2_HOST
+   - Value: 13.60.245.107
+3. Click "New repository secret":
+   - Name:  EC2_SSH_KEY
+   - Value: Paste entire contents of C:\Users\YUVA\Downloads\zenith-key.pem
+            (including -----BEGIN RSA PRIVATE KEY----- and -----END RSA PRIVATE KEY-----)
+(Note: If secrets are not added, Stages 1 to 4 pass green, and Stage 5 provides
+ a graceful notice explaining how to configure them).
+
 
 ================================================================================
 4. KEY ARCHITECTURAL & TECHNICAL TALKING POINTS FOR QUESTIONS
