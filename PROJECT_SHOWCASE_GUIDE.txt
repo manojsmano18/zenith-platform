@@ -1,0 +1,210 @@
+================================================================================
+   ⚡ ZENITH — FULL-STACK E-COMMERCE & CLOUD ANALYTICS PLATFORM
+   COMPLETE PROJECT SHOWCASE & INVIGILATOR DEMONSTRATION GUIDE
+================================================================================
+
+PROJECT OVERVIEW:
+-----------------
+Zenith is an enterprise-grade, cloud-native full-stack e-commerce and merchant
+analytics platform built with modern technologies and DevSecOps best practices.
+
+Tech Stack:
+  - Frontend: React 18, Vite, Tailwind CSS, Lucide Icons, Glassmorphism UI
+  - Backend:  Java 21, Spring Boot 3.3.4, Spring Data JPA, Hibernate, Actuator
+  - Database: PostgreSQL 16 Alpine (Containerized with persistent volume)
+  - Reverse Proxy: NGINX Alpine (Unified Port 80 routing & static file server)
+  - Cloud Host: AWS EC2 (Ubuntu 24.04 LTS, IP: 13.60.245.107)
+  - CI/CD:    GitHub Actions Automated Pipeline (JUnit 5, Trivy, Zero-Downtime CD)
+  - Repo URL: https://github.com/manojsmano18/zenith-platform
+
+
+================================================================================
+1. LIVE ACCESS URLS & ENDPOINTS
+================================================================================
+
+  🌐 Live Public Storefront:
+     http://13.60.245.107/
+
+  🛡️ Merchant Admin Portal & Sales Analytics:
+     http://13.60.245.107/admin
+
+  🔌 Spring Boot REST API (Products Catalog):
+     http://13.60.245.107/api/products
+
+  📊 Merchant Telemetry & Business Analytics API:
+     http://13.60.245.107/api/analytics
+
+  ❤️ Cloud Container Health Probe (Spring Boot Actuator):
+     http://13.60.245.107/actuator/health
+
+  🔄 GitHub Actions CI/CD Pipeline Dashboard:
+     https://github.com/manojsmano18/zenith-platform/actions
+
+
+================================================================================
+2. AUTHENTICATION CREDENTIALS & DEMO ACCOUNTS
+================================================================================
+
+[A] SYSTEM ADMINISTRATOR ACCOUNT (Full Merchant Access)
+    - URL:       http://13.60.245.107/admin
+    - Username:  admin  (or admin@zenith.com)
+    - Password:  admin123
+    - Role:      ADMIN
+    - Privileges: View live sales telemetry, total revenue, average order value
+                  (AOV), manage orders, change order statuses, create products,
+                  upload hardware images.
+
+[B] PRE-SEEDED CUSTOMER ACCOUNT (Checkout & Tracking)
+    - Username:  alex@example.com
+    - Password:  password123
+    - Name:      Alex Mercer
+    - Phone:     +91 98765 43210
+    - Address:   Flat 402, Prestige Towers, Indiranagar, Bengaluru, KA 560038
+    - Role:      CUSTOMER
+
+[C] POSTGRESQL DATABASE CREDENTIALS (Internal Container)
+    - Host:      localhost (or postgres inside docker network)
+    - Port:      5432
+    - Database:  zenithdb
+    - User:      zenithuser
+    - Password:  zenithpass
+    - Data Vol:  zenith_pgdata (Preserves catalog & transactions on restarts)
+
+[D] PROMO CODES FOR CHECKOUT DEMO
+    - ZENITH10    -> 10% Flat Discount on total cart
+    - WELCOME500  -> ₹500 Flat Off on orders over ₹2,000
+    - SUPERDEAL   -> 20% Mega Discount
+
+
+================================================================================
+3. STEP-BY-STEP INVIGILATOR DEMONSTRATION WALKTHROUGH
+================================================================================
+
+Follow these 4 phases to demonstrate the complete full-stack architecture to 
+the invigilator:
+
+--------------------------------------------------------------------------------
+PHASE 1: CUSTOMER STOREFRONT & REAL-TIME SHOPPING EXPERIENCE
+--------------------------------------------------------------------------------
+1. Open http://13.60.245.107/ on a browser (or on a mobile device).
+2. Highlight the UI Aesthetics:
+   - Modern dark mode design system with subtle glassmorphism cards.
+   - Dynamic hover animations, badge status indicators, and currency in INR (₹).
+3. Demonstrate Catalog Filtering & Search:
+   - Click category filter chips: "Audio", "Peripherals", "Displays", "Workspace".
+   - Type "Aero" or "Keyboard" into the search bar (instant live filter).
+4. Demonstrate Cart & Interactive Checkout:
+   - Click "Add to Cart" on 2-3 products (e.g. Zenith Aero Headphones, Keyboard).
+   - Show the dynamic floating cart badge updating item quantity and subtotal.
+   - Click the Cart icon to trigger the slide-out Checkout Drawer.
+   - Enter Promo Code: ZENITH10 and click Apply.
+   - Point out the instant discount calculation and updated total in real-time.
+   - Fill in customer details (or sign in as alex@example.com / password123).
+   - Click "Place Order (Cash on Delivery)".
+   - Order confirmation appears with a generated Order ID.
+   - Mention to the invigilator: "The backend just ran an atomic transaction 
+     in PostgreSQL, deducted stock from inventory, and recorded the order."
+
+
+--------------------------------------------------------------------------------
+PHASE 2: MERCHANT ADMIN PORTAL & REAL-TIME ANALYTICS
+--------------------------------------------------------------------------------
+1. Click the "Admin" link in the navbar or go to: http://13.60.245.107/admin
+2. If prompted, sign in with:
+   - Email: admin
+   - Password: admin123
+3. Demonstrate Merchant Performance Telemetry:
+   - Point out the 4 live KPI cards:
+     * Total Revenue (Formatted in ₹)
+     * Completed Orders Count
+     * Average Order Value (AOV)
+     * Catalog Size (Active SKUs)
+   - Explain to the invigilator: "These are not fake numbers; they are dynamically
+     calculated via JPA database aggregate queries (SUM, COUNT, COALESCE) 
+     from PostgreSQL in Spring Boot."
+4. Demonstrate Top Revenue SKUs:
+   - Show the visual progress bars showing top-selling products by revenue.
+5. Demonstrate Live Order Stream:
+   - Show the order you just placed in Phase 1 appearing at the top of the stream.
+   - Click on the Order Status dropdown and change status from "CONFIRMED" 
+     to "SHIPPED" or "DELIVERED".
+   - Notice the status updates immediately in the database.
+
+
+--------------------------------------------------------------------------------
+PHASE 3: CLOUD INFRASTRUCTURE & BACKEND RESILIENCE
+--------------------------------------------------------------------------------
+1. Open Spring Boot Actuator Health Probe:
+   http://13.60.245.107/actuator/health
+   - Show the response: {"status":"UP"}
+   - Explain: "This endpoint is used by cloud load balancers and Kubernetes 
+     probes to monitor container liveliness."
+2. Open REST API directly:
+   http://13.60.245.107/api/products
+   - Show the clean JSON response generated by Java 21 Spring Boot.
+3. Explain Docker Architecture:
+   - 3 isolated containers running under an internal bridge network:
+     * zenith-frontend (NGINX routing port 80 & proxying /api/ to backend)
+     * zenith-backend  (Spring Boot 3 listening on port 8080)
+     * zenith-postgres (PostgreSQL 16 on port 5432 with persistent volume)
+   - Least-Privilege Security: Backend runs under a non-root 'spring' Linux user.
+
+
+--------------------------------------------------------------------------------
+PHASE 4: THE KILLER FEATURE — LIVE CI/CD PIPELINE DEMONSTRATION
+--------------------------------------------------------------------------------
+This demonstrates automated DevSecOps and continuous deployment:
+
+1. Open the project on your laptop (D:\zenith-platform).
+2. Open frontend/src/components/Navbar.jsx (or any text file).
+3. Change a small visible text (e.g., change "ZENITH" to "ZENITH PRO" or add 
+   an announcement banner).
+4. Open PowerShell in D:\zenith-platform and run:
+     cd D:\zenith-platform
+     git add .
+     git commit -m "feat: Live demo enhancement for invigilator"
+     git push origin main
+
+5. Immediately open the GitHub Actions tab on your browser:
+   https://github.com/manojsmano18/zenith-platform/actions
+6. Show the invigilator the automated stages running live:
+   Stage 1: Backend Unit Tests & Code Verification (Maven JUnit 5)
+   Stage 2: Frontend Lint & Build (Vite production bundle)
+   Stage 3: DevSecOps Trivy Security & CVE Vulnerability Scan
+   Stage 4: Multi-stage Docker Container Image Packaging
+   Stage 5: Automated SSH Zero-Downtime Deployment to AWS EC2
+
+7. Once the pipeline completes green (~60-90 seconds):
+   - Refresh http://13.60.245.107/
+   - Show that your change is LIVE on the internet without you ever logging 
+     into the AWS server manually!
+
+
+================================================================================
+4. KEY ARCHITECTURAL & TECHNICAL TALKING POINTS FOR QUESTIONS
+================================================================================
+
+Q1: "How is data preserved if an EC2 instance reboots or container stops?"
+A: "We use a Docker named volume (zenith_pgdata) mounted to /var/lib/postgresql/data.
+   Even if the containers are destroyed and recreated, all customer accounts,
+   products, and orders persist intact."
+
+Q2: "How does the Frontend communicate with the Backend in Cloud?"
+A: "We use NGINX as an API Gateway / Reverse Proxy on port 80. Browser calls
+   /api/* which NGINX forwards internally to http://backend:8080/api/*. This
+   prevents CORS issues and hides internal ports from public exposure."
+
+Q3: "How is stock concurrency handled during high order volume?"
+A: "Order placement runs within a Spring @Transactional boundary. It checks
+   product.getStockQuantity() >= item.getQuantity() before deducting stock and
+   saving, preventing negative inventory or race conditions."
+
+Q4: "What security measures are implemented (DevSecOps)?"
+A: - Shift-Left Security: Trivy vulnerability scanner runs in CI/CD before deploy.
+   - Least Privilege: Backend Dockerfile switches to non-root 'spring:spring' user.
+   - Path Traversal Defense: File uploads are sanitized against directory traversal.
+   - Prepared Statements / ORM: Spring Data JPA prevents SQL Injection.
+
+================================================================================
+                         END OF SHOWCASE GUIDE
+================================================================================
