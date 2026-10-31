@@ -27,6 +27,10 @@ pipeline {
         timestamps()
     }
 
+    triggers {
+        githubPush()
+    }
+
     stages {
         stage('1. Checkout & Environment Sanity') {
             steps {

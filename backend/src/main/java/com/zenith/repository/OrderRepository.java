@@ -20,6 +20,6 @@ public interface OrderRepository extends JpaRepository<Order, Long> {
     @Query("SELECT oi.productName AS name, SUM(oi.quantity) AS totalSold, SUM(oi.price * oi.quantity) AS revenue " +
            "FROM OrderItem oi " +
            "GROUP BY oi.productName " +
-           "ORDER BY totalSold DESC")
+           "ORDER BY SUM(oi.quantity) DESC")
     List<Object[]> findTopSellingProductsRaw();
 }

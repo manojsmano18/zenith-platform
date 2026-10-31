@@ -33,10 +33,16 @@ export default function AdminAnalytics() {
     );
   }
 
+  const formatINR = (val) => new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: 0
+  }).format(val || 0);
+
   const cards = [
     {
       title: 'Total Revenue',
-      value: `$${analytics?.totalRevenue?.toFixed(2) || '0.00'}`,
+      value: formatINR(analytics?.totalRevenue),
       icon: DollarSign,
       color: 'from-emerald-500/20 to-emerald-500/5',
       textColor: 'text-emerald-400',
@@ -50,7 +56,7 @@ export default function AdminAnalytics() {
     },
     {
       title: 'Average Order Value (AOV)',
-      value: `$${analytics?.averageOrderValue?.toFixed(2) || '0.00'}`,
+      value: formatINR(analytics?.averageOrderValue),
       icon: TrendingUp,
       color: 'from-purple-500/20 to-purple-500/5',
       textColor: 'text-purple-400',
@@ -116,7 +122,7 @@ export default function AdminAnalytics() {
                   <span className="font-semibold text-slate-200 truncate max-w-[250px]">
                     {idx + 1}. {item.productName}
                   </span>
-                  <span className="text-emerald-400 font-bold">${item.revenue?.toFixed(2)} ({item.totalSold} sold)</span>
+                  <span className="text-emerald-400 font-bold">{formatINR(item.revenue)} ({item.totalSold} sold)</span>
                 </div>
                 <div className="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
                   <div
@@ -155,7 +161,7 @@ export default function AdminAnalytics() {
                   </span>
                 </div>
                 <div className="text-right">
-                  <span className="text-sm font-bold text-white block">${ord.totalAmount?.toFixed(2)}</span>
+                  <span className="text-sm font-bold text-white block">{formatINR(ord.totalAmount)}</span>
                   <span className="text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                     {ord.status}
                   </span>

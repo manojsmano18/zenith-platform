@@ -14,7 +14,7 @@ docker compose up --build -d
 
 # 2. Start Jenkins CI/CD Server
 echo "--> 2. Starting Jenkins CI/CD container..."
-docker compose -f docker-compose.jenkins.yml up -d
+docker compose -f docker-compose.jenkins.yml up --build -d
 
 # 3. Wait for services to initialize
 echo "--> 3. Verifying health..."

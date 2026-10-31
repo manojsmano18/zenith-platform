@@ -15,10 +15,12 @@ FROM eclipse-temurin:21-jre-alpine
 WORKDIR /app
 
 # Run as non-root user for cloud security best practice
-RUN addgroup -S spring && adduser -S spring -G spring
-USER spring:spring
+RUN addgroup -S spring && adduser -S spring -G spring && \
+    mkdir -p /app/uploads && \
+    chown -R spring:spring /app
 
-COPY --from=builder /app/target/*.jar app.jar
+COPY --from=builder --chown=spring:spring /app/target/*.jar app.jar
+USER spring:spring
 
 EXPOSE 8080
 

@@ -1,6 +1,24 @@
 version: '3.8'
 
 services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: zenith-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: zenithdb
+      POSTGRES_USER: zenithuser
+      POSTGRES_PASSWORD: zenithpass
+    ports:
+      - "5432:5432"
+    volumes:
+      - zenith_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U zenithuser -d zenithdb"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
   backend:
     build:
       context: ./backend
@@ -9,9 +27,16 @@ services:
     ports:
       - "8085:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=default
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres:5432/zenithdb
+      - SPRING_DATASOURCE_USERNAME=zenithuser
+      - SPRING_DATASOURCE_PASSWORD=zenithpass
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
     volumes:
       - ./uploads:/app/uploads
+    depends_on:
+      postgres:
+        condition: service_healthy
     healthcheck:
       test: ["CMD-SHELL", "wget -q -O - http://localhost:8080/actuator/health | grep UP || exit 1"]
       interval: 10s
@@ -31,6 +56,10 @@ services:
       backend:
         condition: service_healthy
     restart: unless-stopped
+
+volumes:
+  zenith_pgdata:
+    name: zenith_pgdata
 
 networks:
   default:

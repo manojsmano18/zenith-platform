@@ -109,3 +109,27 @@ jobs:
           context: ./frontend
           push: false
           tags: zenith-frontend:${{ github.sha }}, zenith-frontend:latest
+
+  # ==========================================
+  # Stage 5: Automated Continuous Deployment to Cloud (Zero-Downtime)
+  # ==========================================
+  deploy-to-cloud:
+    name: Automated Cloud Deployment (EC2)
+    needs: [docker-build]
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy to Cloud Server via SSH
+        if: ${{ secrets.EC2_HOST != '' }}
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER || 'ubuntu' }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            echo "--> Pulling latest Git changes on cloud server..."
+            cd /home/ubuntu/zenith-platform || cd ~/zenith-platform
+            git pull origin main
+            echo "--> Performing zero-downtime container update..."
+            docker compose up --build -d
+            echo "--> Deployment finished successfully!"
