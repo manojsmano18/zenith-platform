@@ -1,7 +1,7 @@
 import React from 'react';
-import { 
-  Sparkles, Shield, Cpu, Award, Zap, Users, Globe2, 
-  ArrowRight, Banknote, RefreshCw, CheckCircle2, HeartHandshake, Headphones 
+import {
+  Sparkles, Shield, Cpu, Award, Zap, Users, Globe2,
+  ArrowRight, Banknote, RefreshCw, CheckCircle2, HeartHandshake, Headphones
 } from 'lucide-react';
 
 export default function AboutUs({ onShopNow }) {
@@ -51,13 +51,13 @@ export default function AboutUs({ onShopNow }) {
             <Sparkles className="w-3.5 h-3.5" />
             Designed for Creators, Gamers & Engineers
           </div>
-          
+
           <h1 className="text-3xl sm:text-6xl font-extrabold tracking-tight text-white leading-tight">
             Obsessive Precision. <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Zero Compromise</span>.
           </h1>
 
           <p className="text-slate-400 text-sm sm:text-lg leading-relaxed">
-            ZENITH is an engineering collective dedicated to building the most refined desktop hardware in India. We combine aerospace materials, audiophile acoustics, and transparent Cash on Delivery logistics to elevate your daily digital workstation.
+            ZENITH is an engineering collective dedicated to building the most refined computer hardware in India. We combine aerospace materials, audiophile acoustics, and transparent Cash on Delivery logistics to elevate your daily digital workstation.
           </p>
 
           <div className="pt-4 flex justify-center gap-4">
