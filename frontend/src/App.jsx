@@ -86,7 +86,7 @@ export default function App() {
       const params = new URLSearchParams();
       if (selectedCategory !== 'All') params.append('category', selectedCategory);
       if (searchQuery.trim()) params.append('search', searchQuery.trim());
-      
+
       const queryString = params.toString();
       if (queryString) url += `?${queryString}`;
 
@@ -187,7 +187,7 @@ export default function App() {
               <div className="max-w-2xl space-y-4">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/10 text-emerald-400 border border-emerald-500/20">
                   <Sparkles className="w-3.5 h-3.5" />
-                  Next-Gen Cloud E-Commerce & Merchant Telemetry
+                  Next-Gen Cloud E-Commerce & Merchant
                 </div>
                 <h1 className="text-3xl sm:text-5xl font-extrabold tracking-tight text-white leading-tight">
                   Engineered for <span className="bg-gradient-to-r from-emerald-400 to-teal-300 bg-clip-text text-transparent">Precision</span>. Built for Scale.
@@ -195,7 +195,7 @@ export default function App() {
                 <p className="text-slate-400 text-sm sm:text-base leading-relaxed">
                   Discover professional desktop peripherals, audiophile-grade monitoring, and workplace hardware. Backed by Java 21, Spring Data JPA, and automated Cloud CI/CD.
                 </p>
-                
+
                 {/* Feature Chips */}
                 <div className="pt-2 flex flex-wrap gap-4 text-xs font-medium text-slate-300">
                   <span className="flex items-center gap-1.5"><Cpu className="w-4 h-4 text-emerald-400" /> Java 21 Spring Boot 3</span>
@@ -213,11 +213,10 @@ export default function App() {
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${
-                      selectedCategory === cat
-                        ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20'
-                        : 'bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800'
-                    }`}
+                    className={`px-4 py-1.5 rounded-full text-xs font-semibold transition-all ${selectedCategory === cat
+                      ? 'bg-emerald-500 text-white shadow-md shadow-emerald-500/20'
+                      : 'bg-slate-900 hover:bg-slate-800 text-slate-400 hover:text-slate-200 border border-slate-800'
+                      }`}
                   >
                     {cat}
                   </button>
@@ -271,19 +270,19 @@ export default function App() {
         )}
 
         {activeTab === 'orders' && currentUser && (
-          <MyOrders 
-            currentUser={currentUser} 
+          <MyOrders
+            currentUser={currentUser}
             onShopNow={() => {
               setActiveTab('store');
               window.history.pushState(null, '', '/');
-            }} 
+            }}
           />
         )}
 
         {activeTab === 'admin' && currentUser?.role === 'ADMIN' && (
-          <AdminPanel 
-            onLogout={handleLogout} 
-            onProductAdded={() => fetchProducts()} 
+          <AdminPanel
+            onLogout={handleLogout}
+            onProductAdded={() => fetchProducts()}
             onProductUpdated={() => fetchProducts()}
           />
         )}
@@ -328,7 +327,7 @@ export default function App() {
                 <span>•</span>
               </>
             )}
-            <button 
+            <button
               onClick={() => {
                 if (currentUser?.role === 'ADMIN') {
                   setActiveTab('admin');
@@ -336,7 +335,7 @@ export default function App() {
                 } else {
                   handleOpenAuthModal('login', 'Please sign in with your Administrator credentials to access the Admin Panel.');
                 }
-              }} 
+              }}
               className="hover:text-emerald-400 font-medium"
             >
               Admin Portal
